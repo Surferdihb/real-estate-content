@@ -1,4 +1,15 @@
-# Ayrton Silva — copy, weeks 1–4 (EN)
+# Ayrton Silva — copy, weeks 1–4 (EN) — ARCHIVE
+
+> ⚠️ **Predates `CONTENT-DIRECTION.md`.** Written against the old calendar
+> (Ayrton on Tue/Thu, alternating with IDEPUB), before the five-day grid was
+> settled. These seven pieces map to no card in `posts/src/data.js`.
+>
+> **Current copy is in [`weeks-01-08-EN.md`](weeks-01-08-EN.md)** — 40 captions,
+> one per card, ids aligned with `data.js`.
+>
+> Kept for the two pieces that have no card equivalent and are still usable as
+> they stand: the introduction post (W1 · Tuesday) and the social-proof post
+> (W3 · Tuesday).
 
 Written natively in English, not translated. The FR version is for the local
 market; this one is for the expat, cross-border and international-investor

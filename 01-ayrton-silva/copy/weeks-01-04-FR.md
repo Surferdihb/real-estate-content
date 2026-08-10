@@ -1,4 +1,16 @@
-# Ayrton Silva — copy semaines 1 à 4 (FR)
+# Ayrton Silva — copy semaines 1 à 4 (FR) — ARCHIVE
+
+> ⚠️ **Antérieur à `CONTENT-DIRECTION.md`.** Écrit contre l'ancien calendrier
+> (Ayrton mardi/jeudi, en alternance avec IDEPUB), avant que la grille cinq
+> jours ne soit arrêtée. Ces sept textes ne correspondent à aucune carte de
+> `posts/src/data.js`.
+>
+> **La copy à jour est dans [`weeks-01-08-FR.md`](weeks-01-08-FR.md)** — 40
+> légendes, une par carte, identifiants alignés sur `data.js`.
+>
+> Conservé pour deux textes qui n'ont pas d'équivalent en carte et restent
+> utilisables tels quels : le post d'introduction (S1 · Mardi) et le post de
+> preuve sociale (S3 · Mardi).
 
 Voix : première personne, agent de terrain qui sait compter. Pas de superlatifs,
 pas d'émojis en rafale, pas de « 🚀 ». L'autorité vient des chiffres et de ce

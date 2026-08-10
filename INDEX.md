@@ -20,11 +20,18 @@ shared/             pipelines, listing photos, source analyses
 
 # 01 — AYRTON SILVA (active)
 
-Thin on purpose — this is the track that needs new production.
+Direction and voice: **[CONTENT-DIRECTION.md](01-ayrton-silva/CONTENT-DIRECTION.md)**.
+Five posts a week — Mon *le chiffre*, Tue *le système*, Wed **comment je vérifie**
+(flagship), Thu *lecture de marché*, Fri *note de build*.
 
-- `property-analyses/` — 4 written pieces (3 analyses + interactive report), raw material for market-authority posts
-- `copy/weeks-01-04-FR.md` + `weeks-01-04-EN.md` — 8 posts each, ready to publish
-- `market-authority/`, `personal-brand/`, `drafts/` — empty, fill these
+- `posts/src/` — 40 cards, weeks 1–8, FR + EN. `node src/render.mjs` → `out/fr/`, `out/en/`
+- `copy/weeks-01-08-FR.md` + `weeks-01-08-EN.md` — **one caption per card**, ids
+  matching `data.js` (`w1-mon` → `out/fr/w1-mon.png`). This is the publishable set.
+- `copy/weeks-01-04-*.md` — archive, predates the direction. Two pieces still
+  usable: the intro post and the social-proof post.
+- `posts/video/` — silent 9:16 MP4s from the same data, plus the commune series
+- `magnets/` — *Rapport du Sud* lead magnet, FR + EN PDFs
+- `property-analyses/` — 8 written pieces (analyses, market reads, interactive report)
 
 Also draw on: `02-idepub/reference/social-proof/` (11 WhatsApp testimonials).
 

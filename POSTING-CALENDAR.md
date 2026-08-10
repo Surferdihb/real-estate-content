@@ -66,7 +66,49 @@ reactions, the only genuine proof in the set) and
 `luxembourg-market-numbers/09` (the four metrics Luxembourg doesn't publish —
 it demonstrates method rather than claiming results).
 
-## Week-by-week — first 8 weeks
+---
+
+## The Ayrton track — 40 posts, FR + EN
+
+> This supersedes the Ayrton rows in the week-by-week grid below, which was
+> written before `01-ayrton-silva/CONTENT-DIRECTION.md` settled the five-day
+> schedule. The IDEPUB rows below are unaffected and still stand.
+
+Five posts a week, Mon–Fri, from `01-ayrton-silva/posts/out/fr/` (or `out/en/`).
+One caption per card in `01-ayrton-silva/copy/weeks-01-08-FR.md` / `-EN.md`,
+keyed by the same id: `w3-wed` → `out/fr/w3-wed.png`.
+
+| Day | Track | Format | Accent |
+|---|---|---|---|
+| Mon | public | Le chiffre | editorial red |
+| Tue | trade | Le système | slate |
+| Wed | public | **Comment je vérifie** (flagship) | editorial red |
+| Thu | public | Lecture de marché | editorial red |
+| Fri | trade | Note de build | slate |
+
+| Week | Theme |
+|---|---|
+| 1 | Establish — the gap, the method, the two-sided market |
+| 2 | Value and geography — costs, the map, €/m², the zone spread |
+| 3 | The rent cap — 5 %, why cutting the price doesn't help, rates |
+| 4 | Method and honesty — what isn't published, working without an MLS |
+| 5 | What it actually costs — Bëllegen Akt, cash at signing, exit tax |
+| 6 | Energy and value — the 38 % class premium, value already captured |
+| 7 | The rental shortage — 792 vs 45, and why it is a legal artefact |
+| 8 | Location risk — no crime data, CASIPO, flood zones, Belval maturity |
+
+**Before you schedule:** `w1-tue`, `w2-tue`, `w5-tue` and `w8-tue` are the four
+posts carrying real LUMINA captures. The other Tuesdays are text-and-data by
+design — they are written so a screen capture drops straight in later. Nothing
+in the set fakes a screenshot.
+
+Two figures are deliberately shown as contested or stale, and the captions say
+so: the Bëllegen Akt at €40,000 *and* €45,000 (`w5-mon`, `w5-fri`), and the Esch
+unemployment figure dated May 2024.
+
+---
+
+## Week-by-week — first 8 weeks *(IDEPUB rows current; Ayrton rows superseded above)*
 
 ### Weeks 1–2 · Establish
 | Day | Track | Asset |
