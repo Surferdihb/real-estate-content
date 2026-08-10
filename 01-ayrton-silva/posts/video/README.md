@@ -68,9 +68,34 @@ reference, and price plus rent per m² (immotop / Observatoire). Without all of
 those, don't ship it — a commune guide with a gap in the middle is worse than
 no guide.
 
-Currently built: **Esch-sur-Alzette** and **Differdange**. Both come from the
-written analyses, which is why they are detailed. Any further commune needs a
-research pass first.
+Currently built, FR + EN: **Esch-sur-Alzette** and **Differdange** (from the
+written analyses, which is why they are the most detailed), plus **Dudelange**,
+**Bettembourg**, **Sanem** and **Pétange** in `communes-sud.js`. Any further
+commune needs a research pass first.
+
+## Rendering from a clean checkout
+
+`src/fonts/` and `src/media/` are gitignored, so a fresh clone cannot render
+until you put the fonts back. What the renderer needs:
+
+- `../src/fonts/newsreader-{400,500,600,700}.woff2`
+- `../src/fonts/archivo-{500,600,700,800}.woff2`
+
+Both are open-source Google Fonts. Fetch the **full, unsubsetted** files and
+convert to woff2 — the default Google Fonts woff2 is the latin subset, which is
+fine here but leaves nothing spare. Note that neither family contains **U+2192
+(→)**, used in Dudelange's rail row; it falls back to the system sans in every
+render, including the originals. On a machine with no sans fallback it would
+render as tofu, so check that frame before shipping.
+
+You also need a real **ffmpeg with libx264**. The one bundled with Playwright is
+a minimal build — no H.264 encoder, no mp4 muxer, no PNG decoder — and fails at
+the encode step after all 1,794 frames have been rendered.
+
+Renders are ~3.5 min per commune. The renderer's overflow check is the useful
+guard when fonts have been swapped: wrong metrics overflow a panel and it throws
+before spending those minutes. To confirm a substitution is faithful, re-render
+a video that already exists and compare duration, dimensions and file size.
 
 The format deliberately keeps a "check before you buy" chapter at the end —
 flood zones, CASIPO, the neighbourhood price spread. It is the chapter that

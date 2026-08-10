@@ -16,11 +16,16 @@ Every figure here matches its video. Correcting a number in `communes.js` means
 correcting it here. Verified 2026-08-05 (Esch) and 2026-08-04 (Differdange); the
 four southern communes from the immotop.lu capture of July 2026.
 
-> ⚠️ **Only `commune-esch` and `commune-differdange` are rendered in EN.**
-> Dudelange, Bettembourg, Sanem and Pétange exist in FR only. The captions below
-> are written and ready — run
-> `node video/render-commune.mjs commune-dudelange en` (and the same for the
-> other three) before scheduling them.
+> **All six are now rendered in EN.** Dudelange, Bettembourg, Sanem and Pétange
+> were rendered 2026-08-10 to close the gap against the FR set — 59.8 s each,
+> 1080×1920, H.264, silent, same six-chapter timeline.
+>
+> They were rendered on a clean checkout rather than the original machine, so
+> the woff2 files were refetched from Google Fonts (see
+> `../posts/video/README.md`). Output was validated by re-rendering
+> `commune-esch en`, which already existed, and comparing: identical duration
+> and dimensions, file size within 4 %. If you spot any typographic drift
+> against the FR set, that is where it would come from.
 
 **Where it sits in the week.** Not a sixth format: it replaces Thursday's
 *market read* when you want to cover a whole commune rather than a single

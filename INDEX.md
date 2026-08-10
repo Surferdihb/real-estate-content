@@ -30,10 +30,8 @@ Five posts a week — Mon *le chiffre*, Tue *le système*, Wed **comment je vér
 - `copy/weeks-01-04-*.md` — archive, predates the direction. Two pieces still
   usable: the intro post and the social-proof post.
 - `posts/video/` — silent 9:16 MP4s (8 picks) plus « Connaître sa commune », 6 communes
-- `copy/communes-FR.md` + `communes-EN.md` — one caption per commune video
-  ⚠️ EN videos exist for Esch and Differdange only; Dudelange, Bettembourg,
-  Sanem and Pétange are FR-only. Captions are written — run
-  `node video/render-commune.mjs <id> en` before scheduling those four.
+- `copy/communes-FR.md` + `communes-EN.md` — one caption per commune video.
+  All six communes exist in FR and EN.
 - `magnets/` — *Rapport du Sud* lead magnet, FR + EN PDFs
 - `property-analyses/` — 8 written pieces (analyses, market reads, interactive report)
 
