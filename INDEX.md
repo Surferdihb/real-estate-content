@@ -64,7 +64,7 @@ The original 88 French PNGs are untouched in `posts/READY-post-series/`.
 
 ## Portfolio — client work
 
-`portfolio-client-work/` — App 2ch Esch-sur-Alzette · App Mondorf les Bain Didier
+`portfolio-client-work/` — App 2ch Esch-sur-Alzette · App Mondorf les Bains (client)
 (v1.1, v1.2) · VEFA Dahlem
 
 ⚠️ **These carry idemmo branding**: watermark top-left throughout plus an endcard
@@ -84,7 +84,7 @@ to someone else's number.
 
 Everything below is ready but on hold.
 
-- `posts/14-day-campaign/Didier Approval Folder/IDEMMO-day-01..14.mp4` — client-approved, sequenced
+- `posts/14-day-campaign/<client> Approval Folder/IDEMMO-day-01..14.mp4` — client-approved, sequenced
 - `posts/dealmaker-campaign/output/posts/` — 18 posts in hero/proof/conversion triads
 - `videos/codex-idemmo-market-2025-2026/renders/idemmo-luxembourg-market-2025-vs-2026-final-logo-corrected.mp4` — latest cut
 - `videos/codex-private-seller-idemmo/renders/idemmo-private-seller-final.mp4` — FSBO funnel
