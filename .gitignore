@@ -1,0 +1,25 @@
+# Rendered output — regenerate with `node src/render.mjs` / `render-video.mjs`
+*/posts/*/out/
+*/posts/out/
+**/video/out/
+**/.frames/
+**/.frames-c/
+
+# Vendored fonts and photos are inlined at render time and are large
+**/src/fonts/
+**/src/photos/
+**/src/media/
+
+# Originals copied from elsewhere — the source of truth lives in Claude Code
+02-idepub/posts/READY-post-series/
+02-idepub/posts/ai-video-portfolio/
+02-idepub/posts/_retired/
+03-idemmo-phase2/
+shared/listing-photos/
+02-idepub/portfolio-client-work/
+02-idepub/videos/
+02-idepub/reference/
+
+# OS
+Thumbs.db
+.DS_Store

@@ -1,0 +1,146 @@
+<!doctype html>
+<html lang="fr">
+<head>
+<meta charset="utf-8">
+<title>Ayrton Silva — video</title>
+<style>
+  /*{{FONTS}}*/
+
+  /* Ayrton Silva — video, 1080×1920 (9:16).
+     Same editorial identity as the static posts. Every animated property is
+     driven by setFrame(t) in JS, never by CSS animation, so a rendered frame
+     is a pure function of t and the output is reproducible. */
+
+  :root {
+    --paper:#faf8f4; --ink:#16150f; --ink-2:#57534a; --ink-3:#8f887c;
+    --rule:#e2dcd2; --accent:#a33327; --accent-trade:#2f4a58;
+  }
+  .stage.trade { --accent:var(--accent-trade); }
+
+  * { margin:0; padding:0; box-sizing:border-box; }
+  html,body { background:#000; }
+  body { font-family:"Archivo",system-ui,sans-serif; -webkit-font-smoothing:antialiased; }
+
+  .stage {
+    position:relative; width:1080px; height:1920px; background:var(--paper);
+    overflow:hidden; padding:92px 84px 84px; display:flex; flex-direction:column;
+  }
+
+  header { display:flex; align-items:baseline; justify-content:space-between; position:relative; padding-bottom:20px; }
+  header .rule { position:absolute; left:0; bottom:0; height:3px; background:var(--ink); width:0; }
+  .name { font-family:"Newsreader",Georgia,serif; font-size:38px; font-weight:600; color:var(--ink); }
+  .name b { font-weight:700; }
+  .kicker { font-size:17px; font-weight:700; letter-spacing:2.8px; text-transform:uppercase;
+            color:var(--ink-3); text-align:right; line-height:1.5; }
+
+  .rubric { margin-top:52px; font-size:20px; font-weight:700; letter-spacing:3.2px;
+            text-transform:uppercase; color:var(--accent); }
+  h1 { margin-top:22px; font-family:"Newsreader",Georgia,serif; font-weight:600;
+       font-size:88px; line-height:1.05; letter-spacing:-2px; color:var(--ink); }
+  h1 em { font-style:italic; }
+  h1 .ln { display:block; }
+  .standfirst { margin-top:28px; font-family:"Newsreader",Georgia,serif; font-size:32px;
+                line-height:1.4; color:var(--ink-2); }
+
+  .figwrap { margin-top:70px; }
+  .fig { display:flex; align-items:baseline; gap:16px; white-space:nowrap; }
+  .fig .n { font-family:"Newsreader",Georgia,serif; font-weight:700; font-size:230px;
+            line-height:.86; letter-spacing:-7px; color:var(--accent); }
+  .fig.long .n { font-size:168px; letter-spacing:-5px; }
+  .fig .u { font-size:52px; font-weight:600; color:var(--ink-3); }
+  .fig.long .u { font-size:40px; }
+  .fignote { margin-top:30px; font-size:32px; line-height:1.42; color:var(--ink); }
+
+  .rows { margin-top:56px; border-top:1px solid var(--rule);
+          flex:1; display:flex; flex-direction:column; }
+  .rows .row { flex:1; }
+  .row { display:flex; align-items:baseline; justify-content:space-between; gap:26px;
+         padding:24px 0; border-bottom:1px solid var(--rule); }
+  .row .k { font-size:29px; color:var(--ink-2); }
+  .row .v { font-size:30px; font-weight:700; color:var(--ink); font-variant-numeric:tabular-nums; white-space:nowrap; }
+  .row .v.hi { color:var(--accent); }
+
+  .steps { margin-top:40px; border-top:1px solid var(--rule);
+           flex:1; display:flex; flex-direction:column; }
+  .steps .step { flex:1; }
+  .step { display:flex; gap:26px; padding:26px 0; border-bottom:1px solid var(--rule); }
+  .step .n { flex:none; width:56px; font-family:"Newsreader",Georgia,serif; font-size:38px;
+             font-weight:700; color:var(--accent); }
+  .step h3 { font-size:31px; font-weight:700; color:var(--ink); }
+  .step p { margin-top:6px; font-size:27px; line-height:1.38; color:var(--ink-2); }
+
+  .statement { margin-top:38px; padding-left:28px; border-left:4px solid var(--accent);
+               font-family:"Newsreader",Georgia,serif; font-size:38px; line-height:1.32; color:var(--ink); }
+
+  .spacer { flex:1; }
+  .stage:has(.rows) .spacer, .stage:has(.steps) .spacer { display:none; }
+
+  footer { margin-top:34px; padding-top:22px; border-top:1px solid var(--ink); }
+  .source { font-size:21px; line-height:1.45; color:var(--ink-3); }
+  .source b { color:var(--ink-2); font-weight:700; }
+  .handle { margin-top:10px; font-size:21px; font-weight:700; letter-spacing:1.8px;
+            text-transform:uppercase; color:var(--ink-3); }
+
+  /* progress hairline — tells a scroller how long this is */
+  .prog { position:absolute; left:0; bottom:0; height:6px; background:var(--accent); width:0; }
+</style>
+</head>
+<body>
+<div id="app"></div>
+<script>
+/* ---------- deterministic timeline ---------- */
+const clamp = (a,b,v) => Math.max(a, Math.min(b, v));
+const ease  = t => t<0 ? 0 : t>1 ? 1 : 1 - Math.pow(1 - t, 3);      // outCubic
+// progress of a cue that starts at s and lasts d
+const cue = (t, s, d) => ease((t - s) / d);
+
+function setFrame(t, D) {
+  const q = document.querySelector.bind(document);
+  const qa = s => [...document.querySelectorAll(s)];
+
+  q('header .rule').style.width = (cue(t, .05, .55) * 100) + '%';
+
+  const fadeUp = (el, s, d = .5, dist = 26) => {
+    const p = cue(t, s, d);
+    el.style.opacity = p;
+    el.style.transform = `translateY(${(1 - p) * dist}px)`;
+  };
+
+  fadeUp(q('.name'), .10, .45);
+  fadeUp(q('.kicker'), .18, .45);
+  fadeUp(q('.rubric'), .45);
+  qa('h1 .ln').forEach((el, i) => fadeUp(el, .62 + i * .13, .55, 34));
+  const sf = q('.standfirst'); if (sf) fadeUp(sf, 1.25, .55);
+
+  // headline count-up
+  const nEl = q('.fig .n');
+  if (nEl) {
+    const raw = nEl.dataset.value;
+    const p = cue(t, 1.85, 1.15);
+    const num = raw.replace(/[^\d.,]/g, '').replace(/\s/g, '');
+    const val = parseFloat(num.replace(',', '.'));
+    if (!isNaN(val) && val > 0) {
+      const cur = val * p;
+      // rebuild with the original separators/symbols around the number
+      const dec = (num.includes(',') || num.includes('.')) ? 1 : 0;
+      let shown = dec ? cur.toFixed(1).replace('.', ',')
+                      : Math.round(cur).toLocaleString('fr-FR').replace(/ | /g, ' ');
+      nEl.textContent = raw.replace(/[\d.,\s]+/, shown);
+    } else {
+      nEl.textContent = raw;
+    }
+    q('.fig').style.opacity = cue(t, 1.8, .4);
+    const fn = q('.fignote'); if (fn) fadeUp(fn, 3.15, .5);
+  }
+
+  qa('.rows .row').forEach((el, i) => fadeUp(el, 3.5 + i * .30, .5, 20));
+  qa('.steps .step').forEach((el, i) => fadeUp(el, 2.2 + i * .62, .55, 24));
+  const st = q('.statement'); if (st) fadeUp(st, Math.max(4.4, 2.2 + qa('.steps .step').length * .62), .6);
+
+  fadeUp(q('footer'), D - 2.6, .6, 16);
+  q('.prog').style.width = clamp(0, 1, t / D) * 100 + '%';
+}
+window.setFrame = setFrame;
+</script>
+</body>
+</html>

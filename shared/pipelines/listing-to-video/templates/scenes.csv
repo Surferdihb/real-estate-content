@@ -1,0 +1,9 @@
+order,room,secs,photo,prompt_key,seam,custom_prompt
+1,exterior,10,exterior.jpg,drone_approach,cut,
+2,entry,8,entry.jpg,threshold_reveal,cut,
+3,living,10,living.jpg,slow_orbit,cut,
+4,dining,8,dining.jpg,lateral_glide,lock,
+5,kitchen,10,kitchen.jpg,push_in,cut,
+6,bedroom-master,9,bedroom1.jpg,slow_orbit,cut,
+7,bathroom,8,bathroom.jpg,push_in,cut,
+8,terrace,10,terrace.jpg,pull_back_reveal,cut,

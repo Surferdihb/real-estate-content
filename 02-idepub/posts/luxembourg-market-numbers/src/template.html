@@ -1,0 +1,166 @@
+<!doctype html>
+<html lang="fr">
+<head>
+<meta charset="utf-8">
+<title>IDEPUB — Luxembourg market numbers</title>
+<style>
+  /*{{FONTS}}*/
+
+  /* IDEPUB brand system — colours sampled from the supplied brand file
+     idepub_logo_CMJN_icone.png, not from prose:
+       violet #7b3788 → mid #7068a8 → blue #618bc7  (bottom-left to top-right)
+     The pink/orange/green/cyan rainbow belongs to IDEMMO, not IDEPUB.
+     Light canvas, matching the light violet skin chosen for the idepub site.
+     Type: Archivo, embedded as data URIs by render.mjs. */
+
+  :root {
+    --violet:  #7b3788;
+    --mid:     #7068a8;
+    --blue:    #618bc7;
+    --ink:     #17121f;
+    --ink-2:   #4b4459;
+    --ink-3:   #7d7590;
+    --canvas:  #f6f3fa;
+    --card:    #ffffff;
+    --line:    #e7dff1;
+    --grad: linear-gradient(115deg, var(--violet), var(--mid) 52%, var(--blue));
+  }
+
+  @page { margin: 0 }
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+
+  body {
+    background: #ded5e8;
+    font-family: "Archivo", "Segoe UI", system-ui, sans-serif;
+    -webkit-font-smoothing: antialiased;
+  }
+
+  .post {
+    position: relative;
+    width: 1080px;
+    height: 1350px;          /* 4:5 — the largest format a feed shows uncropped */
+    background: var(--canvas);
+    overflow: hidden;
+    padding: 74px 78px 66px;
+    display: flex;
+    flex-direction: column;
+    margin: 0 auto 40px;
+  }
+
+  /* soft violet bloom, top right — the only decorative element */
+  .post::after {
+    content: "";
+    position: absolute;
+    top: -300px; right: -260px;
+    width: 820px; height: 820px;
+    background: radial-gradient(circle, rgba(123,55,136,.13) 0%, rgba(97,139,199,.07) 45%, rgba(255,255,255,0) 70%);
+    pointer-events: none;
+  }
+
+  .inner { position: relative; z-index: 2; display: flex; flex-direction: column; height: 100%; }
+
+  /* ---- header / real logo lockup ---- */
+  header { display: flex; align-items: center; justify-content: space-between; }
+
+  .lockup { display: flex; align-items: center; gap: 18px; }
+  .mark { width: 74px; height: 74px; display: block; }
+  .wordmark {
+    font-size: 38px; font-weight: 800; color: var(--ink);
+    letter-spacing: 6.5px; line-height: 1;
+  }
+  .tagline {
+    margin-top: 6px;
+    font-size: 14.5px; font-weight: 700; color: var(--ink-2);
+    letter-spacing: 2.1px; text-transform: uppercase;
+  }
+
+  .badge {
+    border: 1.5px solid #d8cce6; border-radius: 999px;
+    padding: 13px 26px; color: var(--ink-2);
+    font-size: 20px; font-weight: 600; letter-spacing: .6px;
+  }
+  .badge b { color: var(--violet); font-weight: 800; }
+
+  /* ---- copy ---- */
+  .eyebrow {
+    margin-top: 48px;
+    font-size: 21px; font-weight: 700; letter-spacing: 3.4px;
+    text-transform: uppercase; color: var(--violet);
+  }
+
+  h1 {
+    margin-top: 26px;
+    font-size: 71px; line-height: 1.07; font-weight: 800;
+    letter-spacing: -2.2px; color: var(--ink);
+  }
+  h1 em {
+    font-style: normal;
+    background: var(--grad);
+    -webkit-background-clip: text; background-clip: text; color: transparent;
+  }
+
+  /* ---- hero figure ---- */
+  .figure-wrap { margin-top: 40px; display: flex; align-items: baseline; gap: 10px; }
+  .figure {
+    font-size: 128px; font-weight: 800; letter-spacing: -5px; line-height: .92;
+    background: var(--grad);
+    -webkit-background-clip: text; background-clip: text; color: transparent;
+  }
+  .figure-unit { font-size: 52px; font-weight: 700; color: var(--ink-3); letter-spacing: -1px; }
+  .figure-caption {
+    margin-top: 15px; font-size: 24px; line-height: 1.4; color: var(--ink-2); max-width: 800px;
+  }
+
+  /* ---- data card ---- */
+  .card {
+    margin-top: 34px;
+    background: var(--card);
+    border: 1px solid var(--line);
+    border-radius: 22px;
+    padding: 10px 34px;
+    box-shadow: 0 18px 44px rgba(56,32,74,.09);
+  }
+  .row {
+    display: flex; align-items: center; justify-content: space-between;
+    padding: 19px 0; border-bottom: 1px solid var(--line);
+    font-size: 25px;
+  }
+  .row:last-child { border-bottom: 0; }
+  .row .k { color: var(--ink-2); }
+  .row .v { color: var(--ink); font-weight: 700; font-variant-numeric: tabular-nums; }
+
+  /* ---- CTA post ---- */
+  .cta-pill {
+    display: inline-block; margin-top: 30px;
+    background: var(--grad); color: #fff;
+    font-size: 27px; font-weight: 800; letter-spacing: -.3px;
+    padding: 18px 40px; border-radius: 999px;
+  }
+  .post.is-cta .cta-pill { margin-top: 24px; }
+  .post.is-cta .body { margin-top: 22px; }
+  .post.is-cta h1 { font-size: 66px; }
+
+  .body {
+    margin-top: 30px;
+    font-size: 25px; line-height: 1.48; color: var(--ink-2); max-width: 880px;
+  }
+
+  .spacer { flex: 1; }
+
+  /* ---- footer ---- */
+  footer { position: relative; padding-top: 28px; margin-top: 26px; }
+  footer .hair {
+    position: absolute; top: 0; left: 0; right: 0; height: 2px;
+    background: var(--grad);
+  }
+  .source { font-size: 20px; color: var(--ink-3); line-height: 1.45; }
+  .source b { color: var(--ink-2); font-weight: 700; }
+  .attrib { margin-top: 14px; font-size: 19px; color: #9990a8; letter-spacing: .3px; }
+</style>
+</head>
+<body>
+<!-- Markup is generated by src/render.mjs from src/data.js and injected here.
+     Edit copy and figures in data.js, never in this file. -->
+<div id="app"><!--{{BODY}}--></div>
+</body>
+</html>

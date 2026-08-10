@@ -1,0 +1,108 @@
+<!doctype html>
+<html lang="fr">
+<head>
+<meta charset="utf-8">
+<title>Ayrton Silva — infographies</title>
+<style>
+  /*{{FONTS}}*/
+
+  /* Ayrton Silva — infographics, 1080×1920 (9:16 tall shareable).
+     Same editorial identity. Layouts: board · waterfall · ladder. */
+
+  :root {
+    --paper:#faf8f4; --ink:#16150f; --ink-2:#57534a; --ink-3:#8f887c;
+    --rule:#e2dcd2; --accent:#a33327;
+  }
+  * { margin:0; padding:0; box-sizing:border-box; }
+  body { background:#e8e3da; font-family:"Archivo",system-ui,sans-serif; -webkit-font-smoothing:antialiased; }
+
+  .g { position:relative; width:1080px; height:1920px; background:var(--paper);
+       overflow:hidden; padding:84px 80px 70px; display:flex; flex-direction:column; margin:0 auto 40px; }
+
+  header { display:flex; align-items:baseline; justify-content:space-between;
+           border-bottom:3px solid var(--ink); padding-bottom:18px; }
+  .name { font-family:"Newsreader",Georgia,serif; font-size:34px; font-weight:600; color:var(--ink); }
+  .name b { font-weight:700; }
+  .kicker { font-size:16px; font-weight:700; letter-spacing:2.6px; text-transform:uppercase; color:var(--ink-3); }
+
+  .rubric { margin-top:44px; font-size:19px; font-weight:700; letter-spacing:3px;
+            text-transform:uppercase; color:var(--accent); }
+  h1 { margin-top:18px; font-family:"Newsreader",Georgia,serif; font-weight:600;
+       font-size:80px; line-height:1.04; letter-spacing:-1.8px; color:var(--ink); }
+  h1 em { font-style:italic; }
+  .standfirst { margin-top:22px; font-family:"Newsreader",Georgia,serif; font-size:29px;
+                line-height:1.42; color:var(--ink-2); }
+
+  /* ---- board ---- */
+  .board { margin-top:46px; flex:1; display:flex; flex-direction:column; }
+  .board .bh { display:grid; grid-template-columns: 1.35fr 1fr 0.9fr 0.9fr 1fr;
+               padding-bottom:14px; border-bottom:2px solid var(--ink); }
+  .board .bh div { font-size:17px; font-weight:700; letter-spacing:1.4px; text-transform:uppercase;
+                   color:var(--ink-3); text-align:right; }
+  .board .bh div:first-child { text-align:left; }
+  .board .br { display:grid; grid-template-columns: 1.35fr 1fr 0.9fr 0.9fr 1fr;
+               align-items:baseline; flex:1; border-bottom:1px solid var(--rule); }
+  .board .br div { font-size:27px; font-weight:700; color:var(--ink);
+                   font-variant-numeric:tabular-nums; text-align:right; }
+  .board .br div:first-child { font-family:"Newsreader",Georgia,serif; font-weight:600;
+                               font-size:29px; text-align:left; }
+  .board .br div.hi { color:var(--accent); }
+
+  /* ---- waterfall ---- */
+  
+  .wf .step { display:flex; align-items:center; gap:22px; margin-top:16px; }
+  .wf .lbl { width:330px; font-size:23px; color:var(--ink-2); }
+  .wf .barwrap { flex:1; height:52px; position:relative; }
+  .wf .bar { position:absolute; left:0; top:0; bottom:0; background:var(--ink); border-radius:4px; }
+  .wf .step.add .bar { background:var(--accent); }
+  .wf .val { width:170px; text-align:right; font-size:25px; font-weight:700; color:var(--ink);
+             font-variant-numeric:tabular-nums; }
+  .wf .total { margin-top:26px; padding-top:22px; border-top:2px solid var(--ink);
+               display:flex; justify-content:space-between; align-items:baseline; }
+  .wf .total .k { font-size:27px; font-weight:700; color:var(--ink); }
+  .wf .total .v { font-family:"Newsreader",Georgia,serif; font-size:56px; font-weight:700;
+                  letter-spacing:-1.5px; color:var(--accent); }
+  .split { margin-top:40px; display:flex; gap:22px; }
+  .split > div { flex:1; border:1px solid var(--rule); border-radius:6px; padding:26px; background:#fffefc; }
+  .split h3 { font-size:23px; font-weight:800; color:var(--ink); }
+  .split .amt { margin-top:10px; font-family:"Newsreader",Georgia,serif; font-size:38px;
+                font-weight:700; color:var(--accent); letter-spacing:-1px; }
+  .split p { margin-top:10px; font-size:19px; line-height:1.4; color:var(--ink-2); }
+
+  /* ---- ladder ---- */
+  .ladder { margin-top:44px; flex:1; display:flex; flex-direction:column; }
+  .rung { display:flex; align-items:center; gap:18px; flex:1; }
+  .rung .lbl { width:280px; font-size:24px; color:var(--ink); font-weight:600; }
+  .rung.hi .lbl { color:var(--accent); font-weight:800; }
+  .rung .barwrap { flex:1; height:40px; position:relative; }
+  .rung .bar { position:absolute; left:0; top:4px; bottom:4px; background:var(--ink);
+               border-radius:3px; opacity:.82; }
+  .rung.hi .bar { background:var(--accent); opacity:1; }
+  .rung .pm2 { width:120px; text-align:right; font-size:23px; font-weight:700; color:var(--ink);
+               font-variant-numeric:tabular-nums; }
+  .rung .yld { width:110px; text-align:right; font-size:22px; font-weight:700; color:var(--ink-3);
+               font-variant-numeric:tabular-nums; }
+  .rung.hi .yld { color:var(--accent); }
+  .ladder-legend { display:flex; justify-content:flex-end; gap:26px; margin-top:8px;
+                   font-size:16px; letter-spacing:1px; text-transform:uppercase; color:var(--ink-3); }
+
+  /* waterfall pages centre their content block */
+  .wf { margin-top:auto; }
+  .g:has(.wf) .takeaway { margin-bottom:auto; }
+  .wf .step { margin-top:22px; }
+  .wf .barwrap { height:64px; }
+
+  /* takeaway + footer */
+  .takeaway { margin-top:36px; padding-left:26px; border-left:4px solid var(--accent);
+              font-family:"Newsreader",Georgia,serif; font-size:31px; line-height:1.34; color:var(--ink); }
+  footer { margin-top:30px; padding-top:20px; border-top:1px solid var(--ink);
+           display:flex; justify-content:space-between; gap:24px; align-items:baseline; }
+  .source { font-size:18px; line-height:1.4; color:var(--ink-3); max-width:700px; }
+  .source b { color:var(--ink-2); font-weight:700; }
+  .handle { font-size:18px; font-weight:700; letter-spacing:1.6px; text-transform:uppercase; color:var(--ink-3); }
+</style>
+</head>
+<body>
+<!--{{BODY}}-->
+</body>
+</html>

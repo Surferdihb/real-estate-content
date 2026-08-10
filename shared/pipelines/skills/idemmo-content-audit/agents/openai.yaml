@@ -1,0 +1,4 @@
+interface:
+  display_name: "IDEMMO Content Audit"
+  short_description: "Audit IDEMMO content before generation"
+  default_prompt: "Use $idemmo-content-audit to audit IDEMMO assets, copy, layout, branding, and output files before writing content."

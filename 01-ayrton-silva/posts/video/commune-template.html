@@ -1,0 +1,145 @@
+<!doctype html>
+<html lang="fr">
+<head>
+<meta charset="utf-8">
+<title>Connaître sa commune</title>
+<style>
+  /*{{FONTS}}*/
+
+  /* « Connaître sa commune » — 60s, 1080×1920.
+     Chaptered: a title card, six chapters, a source card. Every animated
+     property is a pure function of t via setFrame(), so frames are stable. */
+
+  :root {
+    --paper:#faf8f4; --ink:#16150f; --ink-2:#57534a; --ink-3:#8f887c;
+    --rule:#e2dcd2; --accent:#a33327;
+  }
+  * { margin:0; padding:0; box-sizing:border-box; }
+  html,body { background:#000; }
+  body { font-family:"Archivo",system-ui,sans-serif; -webkit-font-smoothing:antialiased; }
+
+  .stage { position:relative; width:1080px; height:1920px; background:var(--paper); overflow:hidden; }
+
+  /* persistent masthead */
+  .top { position:absolute; top:0; left:0; right:0; padding:70px 84px 0; z-index:5; }
+  .top .bar { display:flex; align-items:baseline; justify-content:space-between;
+              border-bottom:2px solid var(--ink); padding-bottom:16px; }
+  .brand { font-family:"Newsreader",Georgia,serif; font-size:32px; font-weight:600; color:var(--ink); }
+  .brand b { font-weight:700; }
+  .series { font-size:16px; font-weight:700; letter-spacing:2.6px; text-transform:uppercase; color:var(--accent); }
+
+  /* chapter rail */
+  .rail { display:flex; gap:8px; margin-top:18px; }
+  .rail i { flex:1; height:4px; background:var(--rule); border-radius:2px; position:relative; overflow:hidden; }
+  .rail i span { position:absolute; inset:0 auto 0 0; width:0; background:var(--accent); }
+
+  /* panels stack in the same box; setFrame cross-fades them */
+  .panel { position:absolute; left:0; right:0; top:250px; bottom:190px;
+           padding:0 84px; display:flex; flex-direction:column; opacity:0; }
+
+  /* title card */
+  .t-kicker { font-size:22px; font-weight:700; letter-spacing:4px; text-transform:uppercase; color:var(--accent); }
+  .t-name { margin-top:26px; font-family:"Newsreader",Georgia,serif; font-weight:700;
+            font-size:132px; line-height:.98; letter-spacing:-3px; color:var(--ink); }
+  .t-sub { margin-top:26px; font-family:"Newsreader",Georgia,serif; font-size:38px;
+           line-height:1.35; color:var(--ink-2); }
+  .t-line { margin-top:44px; height:4px; width:0; background:var(--accent); }
+  .t-foot { margin-top:auto; padding-top:40px; font-size:26px; line-height:1.45; color:var(--ink-2); }
+
+  /* chapter */
+  .c-label { display:inline-block; align-self:flex-start; font-size:19px; font-weight:700;
+             letter-spacing:3px; text-transform:uppercase; color:var(--accent);
+             border:2px solid var(--accent); border-radius:999px; padding:10px 22px; }
+  .c-head { margin-top:30px; font-family:"Newsreader",Georgia,serif; font-weight:600;
+            font-size:80px; line-height:1.04; letter-spacing:-1.8px; color:var(--ink); }
+  .c-rows { margin-top:48px; border-top:1px solid var(--rule); }
+  .c-row { display:flex; align-items:baseline; justify-content:space-between; gap:30px;
+           padding:34px 0; border-bottom:1px solid var(--rule); }
+  .c-row .k { font-size:34px; color:var(--ink-2); flex:none; }
+  .c-row .v { font-size:35px; font-weight:700; color:var(--ink); text-align:right; }
+  .c-note { margin-top:48px; padding-left:26px; border-left:4px solid var(--accent);
+            font-family:"Newsreader",Georgia,serif; font-size:33px; line-height:1.36; color:var(--ink); }
+
+  .panel.chapter { justify-content:center; }
+  .panel.source  { justify-content:center; }
+
+  /* source card */
+  .s-head { font-family:"Newsreader",Georgia,serif; font-weight:600; font-size:76px;
+            line-height:1.05; letter-spacing:-1.6px; color:var(--ink); }
+  .s-body { margin-top:32px; font-size:29px; line-height:1.5; color:var(--ink-2); }
+  .s-src { margin-top:44px; padding-top:24px; border-top:1px solid var(--rule);
+           font-size:24px; line-height:1.5; color:var(--ink-3); }
+
+  /* persistent footer */
+  .bottom { position:absolute; left:0; right:0; bottom:0; padding:0 84px 62px; z-index:5; }
+  .bottom .line { height:1px; background:var(--ink); opacity:.25; }
+  .handle { margin-top:18px; font-size:20px; font-weight:700; letter-spacing:1.8px;
+            text-transform:uppercase; color:var(--ink-3); }
+  .prog { position:absolute; left:0; bottom:0; height:6px; background:var(--accent); width:0; }
+</style>
+</head>
+<body>
+<div id="app"></div>
+<script>
+const clamp = (a,b,v) => Math.max(a, Math.min(b, v));
+const ease  = t => t<0 ? 0 : t>1 ? 1 : 1 - Math.pow(1-t, 3);
+const cue   = (t,s,d) => ease((t-s)/d);
+
+/* Timing, in seconds. TITLE then N chapters then SOURCE. */
+window.TIMING = { title: 5.0, chapter: 8.3, source: 5.0 };
+
+function setFrame(t, D) {
+  const q = document.querySelector.bind(document);
+  const qa = s => [...document.querySelectorAll(s)];
+  const T = window.TIMING;
+  const panels = qa('.panel');
+  const nChap  = qa('.panel.chapter').length;
+
+  // which panel is active
+  const starts = [0];
+  starts.push(T.title);
+  for (let i = 1; i < nChap; i++) starts.push(T.title + i * T.chapter);
+  starts.push(T.title + nChap * T.chapter);           // source card
+
+  panels.forEach((p, i) => {
+    const s = starts[i];
+    const e = (i + 1 < starts.length) ? starts[i+1] : D;
+    const inP  = cue(t, s, .55);
+    const outP = (i + 1 < starts.length) ? cue(t, e - .35, .35) : 0;
+    const vis  = clamp(0, 1, inP - outP);
+    p.style.opacity = vis;
+    p.style.transform = `translateY(${(1 - inP) * 30 + outP * -18}px)`;
+    p.style.pointerEvents = 'none';
+  });
+
+  // stagger the rows of whichever chapter is showing
+  qa('.panel.chapter').forEach((p, ci) => {
+    const s = starts[ci + 1];
+    p.querySelectorAll('.c-row').forEach((r, i) => {
+      const rp = cue(t, s + .5 + i * .34, .45);
+      r.style.opacity = rp;
+      r.style.transform = `translateY(${(1 - rp) * 16}px)`;
+    });
+    const note = p.querySelector('.c-note');
+    if (note) {
+      const np = cue(t, s + .5 + p.querySelectorAll('.c-row').length * .34 + .2, .5);
+      note.style.opacity = np;
+      note.style.transform = `translateY(${(1 - np) * 14}px)`;
+    }
+  });
+
+  // title card flourish
+  const tl = q('.t-line'); if (tl) tl.style.width = cue(t, .9, .8) * 220 + 'px';
+
+  // chapter rail — one segment per chapter, fills as it plays
+  qa('.rail i').forEach((seg, i) => {
+    const s = starts[i + 1], e = s + T.chapter;
+    seg.querySelector('span').style.width = clamp(0, 1, (t - s) / (e - s)) * 100 + '%';
+  });
+
+  q('.prog').style.width = clamp(0, 1, t / D) * 100 + '%';
+}
+window.setFrame = setFrame;
+</script>
+</body>
+</html>

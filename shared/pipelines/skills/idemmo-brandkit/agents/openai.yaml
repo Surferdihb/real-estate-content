@@ -1,0 +1,4 @@
+interface:
+  display_name: "IDEMMO Brand Kit"
+  short_description: "Create IDEMMO-branded content and videos."
+  default_prompt: "Use $idemmo-brandkit to create IDEMMO content with the approved Luxembourg real-estate visual system."

@@ -1,0 +1,7 @@
+order,room,secs,photo,prompt_key,seam,custom_prompt
+1,exterior,10,exterior.jpg,drone_approach,cut,
+2,living-stained-glass,10,living-stained-glass.jpg,slow_orbit,cut,
+3,living-kitchen,10,living-kitchen.jpg,lateral_glide,cut,
+4,bedroom-master,8,bedroom-master.jpg,slow_orbit,cut,
+5,bedroom-green,8,bedroom-green.jpg,window_drift,cut,
+6,bathroom,8,bathroom.jpg,push_in,cut,
