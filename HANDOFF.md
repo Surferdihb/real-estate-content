@@ -1,7 +1,7 @@
 # Handoff — pick up here
 
-Written 10/08/2026 when the previous session hit its context limit.
-Read `SESSION-LOG.md` first for *why* things are the way they are.
+Updated 10/08/2026. Read `SESSION-LOG.md` first for *why* things are the way
+they are.
 
 ---
 
@@ -9,11 +9,15 @@ Read `SESSION-LOG.md` first for *why* things are the way they are.
 
 | | |
 |---|---|
-| Repo | [github.com/Surferdihb/real-estate-content](https://github.com/Surferdihb/real-estate-content) — public, `main`, clean |
-| Google Drive | `G:\My Drive\Real Estate Content` — 411 files, 632 MB, synced via Drive for Desktop |
+| Repo | [github.com/Surferdihb/real-estate-content](https://github.com/Surferdihb/real-estate-content) — public, `main` |
+| Google Drive | `G:\My Drive\Real Estate Content` — synced via Drive for Desktop |
 | Ayrton static posts | 80 (8 weeks × 5, FR + EN) |
 | Ayrton post videos | 16 (9:16, silent) |
-| Commune videos | **6 FR, 2 EN** — see gap below |
+| Commune videos | **6 FR, 6 EN** — complete |
+| Ayrton infographics | 3 (board · waterfall · ladder), FR + EN |
+| Ayrton carousels | **3 sets, 16 slides per language** |
+| Lead magnet | « Le rapport du Sud » PDF, FR + EN |
+| Newsletter | issue 1, FR + EN |
 | IDEPUB catalogue | 160 across 9 rebuilt series |
 | Real LUMINA captures | 3 (Dudelange map, knowledge graph, Public Intelligence) |
 
@@ -21,53 +25,17 @@ Everything renders from a `data.js`. Nothing is hand-placed.
 
 ---
 
-## Immediate gap — 4 EN commune videos
-
-FR has six communes. EN has only Esch and Differdange.
-
-```bash
-cd 01-ayrton-silva/posts/video
-node render-commune.mjs commune-dudelange en
-node render-commune.mjs commune-bettembourg en
-node render-commune.mjs commune-sanem en
-node render-commune.mjs commune-petange en
-```
-
-~6 min each, 1794 frames. Run in background. Data is already in
-`communes-sud.js`; the EN blocks exist.
-
----
-
-## Unfinished research — schools and transport
-
-The four Sud communes have **market data but incomplete school/transport
-chapters**. Transport is largely gathered, schools are not.
-
-Confirmed so far:
-
-| Commune | Rail |
-|---|---|
-| Bettembourg | **2nd busiest station in Luxembourg**, ~3.5 M passengers (2022), 3 platforms; line 60 splits into three branches here |
-| Pétange | **5th busiest**, 1.7 M passengers (2022); junction of lines 60 and 70; cross-border to Athus (BE) and Longwy (FR); Train 1900 heritage line to Fond-de-Gras |
-| Dudelange | **4 stations** on branch 60A toward Volmerange-les-Mines (FR): Dudelange-Centre, -Ville, -Usines, + one more |
-| Sanem | Belvaux-Soleuvre on line 60 (Belval corridor) |
-
-**Still needed:** secondary schools (lycées) per commune, any international
-school presence, and one health reference each. Sources: `men.public.lu`,
-the commune websites, `mobiliteit.lu`.
-
-Do not ship a commune video without them — the format's credibility rests on
-the chapters being complete.
-
----
-
 ## Open tasks
 
-1. **4 EN commune videos** — above, mechanical.
-2. **« Le rapport du Sud » PDF lead magnet** — the four-commune comparison is
-   already written in `property-analyses/PROPERTY-MARKET-Sud-4-communes.md`.
-3. **Infographics engine + 3 graphics.**
-4. **Explainers, shorts, carousels, newsletter.**
+1. **Explainers and voiced shorts** — blocked on the operator, see below. The
+   silent timelines already exist and take narration without being rebuilt.
+2. **Newsletter issue 2** — the plan is written into the end of issue 1: schools
+   and rail commune by commune, plus what the summer 2026 closure of the
+   Bettembourg–Luxembourg axis showed about line 60's dependencies.
+3. **More carousels** — the engine takes a new set in one data block. Format
+   that works: cover states the claim, two or three slides prove it, one says
+   what is *not* known, one closes.
+4. **Refresh the figures** if anything ships past November 2026.
 
 ---
 
@@ -87,10 +55,30 @@ the chapters being complete.
 
 ---
 
+## Renderers
+
+All four take the same shape: edit the data, re-run, a clipped panel throws
+rather than shipping.
+
+```bash
+cd 01-ayrton-silva
+node posts/src/render.mjs                       # 80 static posts
+node posts/carousels/src/render.mjs             # 16 slides per language
+node posts/infographics/src/render.mjs          # 3 graphics
+node posts/video/render-commune.mjs             # all communes, fr + en
+node magnets/src/render-pdf.mjs                 # the lead magnet
+```
+
+Commune videos are ~6 min each (1794 frames) — run them in the background, and
+one at a time: the renderer uses a single `.frames-c` scratch directory, so two
+concurrent runs would fight over it.
+
+---
+
 ## Housekeeping
 
-- `_drive-upload/` is a **632 MB duplicate** used to stage the Drive copy. Safe
-  to delete; originals live in each `out/`. It is gitignored.
+- `_drive-upload/` is a duplicate used to stage the Drive copy. Safe to delete;
+  originals live in each `out/`. It is gitignored.
 - IDEMMO's Videos folder holds 4 cuts of the same market film (~25 MB each).
   Only `idemmo-luxembourg-market-2025-vs-2026-final-logo-corrected.mp4` is the
   one to post.
@@ -100,6 +88,7 @@ the chapters being complete.
 ## Still blocked on the operator
 
 - **Voiceover.** Video timelines are built to take narration without change.
+  This is what gates the explainers.
 - **Face content.** None exists anywhere in the library.
 - **Real renovation and construction-site photography** — `remodeling` is a
   before/after series with no genuine "before", and `constructions` uses the

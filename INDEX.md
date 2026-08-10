@@ -20,10 +20,17 @@ shared/             pipelines, listing photos, source analyses
 
 # 01 — AYRTON SILVA (active)
 
-Thin on purpose — this is the track that needs new production.
+Everything here renders from a `data.js`. Nothing is hand-placed, and every
+figure carries a named public source.
 
 - `property-analyses/` — 4 written pieces (3 analyses + interactive report), raw material for market-authority posts
 - `copy/weeks-01-04-FR.md` + `weeks-01-04-EN.md` — 8 posts each, ready to publish
+- `posts/src/` — 80 static posts (8 weeks × 5, FR + EN)
+- `posts/video/` — post videos + « Connaître sa commune », 6 communes FR **and** EN
+- `posts/infographics/` — 3 graphics (board · waterfall · ladder), FR + EN
+- `posts/carousels/` — 3 carousels, 16 slides per language. See its README
+- `magnets/` — « Le rapport du Sud » PDF lead magnet, FR + EN
+- `newsletter/` — monthly letter, issue 1 FR + EN
 - `market-authority/`, `personal-brand/`, `drafts/` — empty, fill these
 
 Also draw on: `02-idepub/reference/social-proof/` (11 WhatsApp testimonials).
