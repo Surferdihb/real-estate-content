@@ -1,0 +1,126 @@
+<!doctype html>
+<html lang="fr">
+<head>
+<meta charset="utf-8">
+<title>Ayrton Silva — carrousels</title>
+<style>
+  /*{{FONTS}}*/
+
+  /* Ayrton Silva — carousels, 1080×1350 slides.
+     Same editorial identity as the posts. Slide kinds:
+     cover · rows · figure · steps · split · board · close. */
+
+  :root {
+    --paper:#faf8f4; --ink:#16150f; --ink-2:#57534a; --ink-3:#8f887c;
+    --rule:#e2dcd2; --accent:#a33327; --slate:#3f5a6b;
+  }
+  * { margin:0; padding:0; box-sizing:border-box; }
+  body { background:#e8e3da; font-family:"Archivo",system-ui,sans-serif; -webkit-font-smoothing:antialiased; }
+
+  .slide { position:relative; width:1080px; height:1350px; background:var(--paper);
+           overflow:hidden; padding:74px 76px 62px; display:flex; flex-direction:column;
+           margin:0 auto 40px; }
+  .slide.trade { --accent:var(--slate); }
+
+  header { display:flex; align-items:baseline; justify-content:space-between;
+           border-bottom:3px solid var(--ink); padding-bottom:16px; }
+  .name { font-family:"Newsreader",Georgia,serif; font-size:32px; font-weight:600; color:var(--ink); }
+  .name b { font-weight:700; }
+  .kicker { font-size:15px; font-weight:700; letter-spacing:2.4px; text-transform:uppercase; color:var(--ink-3); }
+
+  .rubric { margin-top:38px; font-size:18px; font-weight:700; letter-spacing:3px;
+            text-transform:uppercase; color:var(--accent); }
+  h1 { margin-top:16px; font-family:"Newsreader",Georgia,serif; font-weight:600;
+       font-size:78px; line-height:1.04; letter-spacing:-1.8px; color:var(--ink); }
+  h1 em { font-style:italic; }
+  h2 { margin-top:16px; font-family:"Newsreader",Georgia,serif; font-weight:600;
+       font-size:56px; line-height:1.1; letter-spacing:-1.2px; color:var(--ink); }
+  h2 em { font-style:italic; }
+  .standfirst { margin-top:20px; font-family:"Newsreader",Georgia,serif; font-size:29px;
+                line-height:1.42; color:var(--ink-2); }
+  .body { margin-top:34px; flex:1; display:flex; flex-direction:column; }
+
+  /* rows */
+  .rows { display:flex; flex-direction:column; }
+  .row { display:flex; align-items:baseline; justify-content:space-between; gap:24px;
+         padding:22px 0; border-bottom:1px solid var(--rule); }
+  .row .k { font-size:26px; color:var(--ink-2); }
+  .row .v { font-size:30px; font-weight:700; color:var(--ink); font-variant-numeric:tabular-nums;
+            text-align:right; }
+  .row .v.hi { color:var(--accent); }
+
+  /* figure */
+  .figure { margin:auto 0; }
+  .figure .n { font-family:"Newsreader",Georgia,serif; font-size:190px; font-weight:700;
+               letter-spacing:-6px; line-height:1; color:var(--accent); }
+  .figure.long .n { font-size:140px; letter-spacing:-4px; }
+  .figure .u { font-family:"Newsreader",Georgia,serif; font-size:62px; font-weight:600; color:var(--ink-2); }
+  .figure .note { margin-top:26px; font-family:"Newsreader",Georgia,serif; font-size:31px;
+                  line-height:1.36; color:var(--ink); max-width:840px; }
+
+  /* steps */
+  .steps { display:flex; flex-direction:column; gap:18px; }
+  .step { display:flex; gap:22px; align-items:flex-start; }
+  .step .n { flex:0 0 54px; height:54px; border-radius:50%; border:2px solid var(--accent);
+             color:var(--accent); font-size:24px; font-weight:800; display:flex;
+             align-items:center; justify-content:center; }
+  .step h3 { font-size:27px; font-weight:800; color:var(--ink); }
+  .step p { margin-top:6px; font-size:23px; line-height:1.4; color:var(--ink-2); }
+
+  /* split */
+  .split { display:flex; gap:22px; margin-top:6px; }
+  .split > div { flex:1; border:1px solid var(--rule); border-radius:6px; padding:28px; background:#fffefc; }
+  .split h3 { font-size:24px; font-weight:800; color:var(--ink); }
+  .split .amt { margin-top:12px; font-family:"Newsreader",Georgia,serif; font-size:44px;
+                font-weight:700; color:var(--accent); letter-spacing:-1px; }
+  .split p { margin-top:12px; font-size:20px; line-height:1.42; color:var(--ink-2); }
+
+  /* board */
+  .board { flex:1; display:flex; flex-direction:column; }
+  .board .bh { display:grid; grid-template-columns:1.4fr 1fr 1fr 1fr;
+               padding-bottom:12px; border-bottom:2px solid var(--ink); }
+  .board .bh div { font-size:16px; font-weight:700; letter-spacing:1.4px; text-transform:uppercase;
+                   color:var(--ink-3); text-align:right; }
+  .board .bh div:first-child { text-align:left; }
+  .board .br { display:grid; grid-template-columns:1.4fr 1fr 1fr 1fr; align-items:baseline;
+               flex:1; border-bottom:1px solid var(--rule); }
+  .board .br div { font-size:26px; font-weight:700; color:var(--ink);
+                   font-variant-numeric:tabular-nums; text-align:right; }
+  .board .br div:first-child { font-family:"Newsreader",Georgia,serif; font-weight:600;
+                               font-size:28px; text-align:left; }
+  .board .br div.hi { color:var(--accent); }
+
+  /* statement + close */
+  .statement { margin-top:40px; padding-left:26px; border-left:4px solid var(--accent);
+               font-family:"Newsreader",Georgia,serif; font-size:34px; line-height:1.34; color:var(--ink); }
+  .close .cta { font-size:28px; line-height:1.45; color:var(--ink-2); }
+
+  /* cover and close carry no table: centre the type block instead of
+     letting it hang from the masthead with 600px of paper below it. */
+  .slide.cover .rubric, .slide.close .rubric { margin-top:auto; }
+  .slide.cover .standfirst, .slide.close .body { margin-bottom:auto; }
+  .slide.cover .body, .slide.close .body { flex:0 0 auto; margin-top:28px; }
+  .slide.close h2 { margin-top:auto; }
+
+  /* data slides: let the content breathe across the whole panel rather than
+     stacking at the top with paper underneath */
+  .rows { flex:1; justify-content:space-between; }
+  .steps { flex:1; justify-content:center; gap:46px; }
+  .body:has(.split) { justify-content:center; }
+  .figure { margin:auto 0; }
+  footer { margin-top:44px; padding-top:18px; border-top:1px solid var(--ink);
+           display:flex; justify-content:space-between; gap:24px; align-items:baseline; }
+  .source { font-size:17px; line-height:1.4; color:var(--ink-3); max-width:680px; }
+  .source b { color:var(--ink-2); font-weight:700; }
+  .handle { font-size:17px; font-weight:700; letter-spacing:1.6px; text-transform:uppercase; color:var(--ink-3);
+            white-space:nowrap; }
+  .pager { position:absolute; right:76px; bottom:112px; font-size:16px; font-weight:700;
+           letter-spacing:2px; color:var(--ink-3); font-variant-numeric:tabular-nums; }
+  .swipe { position:absolute; right:76px; bottom:112px; font-size:16px; font-weight:700;
+           letter-spacing:2px; text-transform:uppercase; color:var(--accent); }
+</style>
+</head>
+<body>
+<!--{{BODY}}-->
+</body>
+</html>
